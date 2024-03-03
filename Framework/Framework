@@ -1,0 +1,46 @@
+Bibliotheques:
+    fonction deja cree 
+    class
+Framework:
+    Outils pour travailler plus rapide
+    Il deja une squelette predefini pour une application
+    Juste des petites personalisations pour l'application
+    Partout dans toutes les languages
+    pour chaque Framework:
+        languages:
+            php
+            java(web):
+                spring
+                strust
+            C#
+            python
+            perl
+            JSP         java
+            ASP         .net
+    ->php:
+        productivite: il faut que ca soit rentable
+            vitesse
+            maniabilite
+            performance
+        Caracteristiques: 
+            code PHP:
+                <? php
+                    //code php;
+                '?>
+                Toutes instructions se terminent par ;
+                Il n'exige pas le type de variable:
+                    $variable = 1;
+                Affichage:
+                    echo "var = $var";          //extrait la valeur du var
+                    echo 'var = $var';          //des chaines
+                On peut inclure du code hmtl dans le code php et vice-versa
+                Tableau:
+                    Indices numeriques:
+                        tab[0..n]                   //comme en C
+                    Tableau associatif: index chaines
+                        En utilisant des cles commes indices
+                    Expression array():
+                S'il existe un extrait de code php il faut que l'extension du fichier soit php
+
+                Recuperation form :
+                    

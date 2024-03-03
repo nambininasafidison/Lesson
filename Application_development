@@ -1,0 +1,238 @@
+Devellopement d'une application:
+    utilisation d'une objet graphic avec c++,java:
+        outil:
+            processing
+            QTCreator
+    JAVA:
+        POO (Progammation oriente objet)
+        specifite avec c++:
+            POO seulement
+            tout est objet
+            tout instruction est inclut dans une classe (rendre le syntax  plus simple)
+            fichier ecxecutable compatible a tous les environements(pas besoin de recompilation): 
+                extension (.class) appele code byte (juste la version binaire du code java)
+                au niveau du JVM(ca ne depend pas du plateform ou du system) on peut le considerer aussi adapteur de compilation
+                tout plateform qu'on peut installer JVM on peut executer le fichier compile sans recompiler
+        outil de compilation:
+            JDK(Java Development Kit):
+                tous les outils de compilteur et JVM
+                installation:
+                    configuration de la variable d'Environment JAVA_HoME : (chemin vers la repertoire d'installation du java)
+                    test:
+                        la commande $java pour l'execution et $javac pour la compilation
+            JRE(Java Runtime Environment):
+                pour les utilisateurs
+        Devellopement:
+            contenu du code java:
+                [acces] class [Nom_class]{
+                    [declaration attributs]
+                    [acces] type nom_attribut;
+                    [methode]
+                    [acces] type methode(type parametre){
+                        instructions
+                    }
+                }
+            exemple:
+                public class Rect
+                {
+                    private float lenght;
+                    private float width;
+                    public Rect()
+                    {
+
+                    }
+                    public void setLenght(float lenght)
+                    {
+                        this.lenght = lenght
+                    }
+                }
+            pas besoin de destructeur
+            pas de pointeur
+            type d'acces:'
+                public
+                private
+                protected
+                paquetage(package) <=> namespace(espace de nommage)
+                    package associe avec le systeme de fichier (repertoire)
+                    tout class de meme repertoire sont visible entre eux la reciproque est fausse
+                    importation :
+                        import package.Nom_class
+                        import p1.p11.p111.Nom_class
+            il faut une class principale ou main class qui contient la methode main()
+                contenu:
+                    public class App
+                    {
+                        public static void main(String args[])
+                        {
+                            //tout instruction a executer
+                        }
+                    }
+            instanciation:
+                Nom_class instance = new Nom_class();
+                exemple: Cercle c = new Cercle();
+                appele des membres:
+                    instance.attributs ou instance.methode()
+            static:
+                appele attributs/methode static:
+                    Nom_class.attributs/methode()
+                exemple d'utilisation' static: connaitre le nombre d'instance cree'
+            heritage:
+                pas d'heritage multiple(heritier une seul class mere)
+                syntax:'
+                    public class A extends B
+                    {
+
+                    }
+                methode virtuel: (on peut redefinir dans la class fille)
+                abstraction:
+                    methode: pas de definition a la class mere mais il faut la definir a la class fille
+                    en c++: 
+                        virtual void methode()=0; //ou methode virtuelle pure
+                    class abtraite: 
+                        une class qui contient au moins une methode abstraite
+                        on ne peut pas instancer
+                        syntax:
+                            public abstract class Vehicule
+                            {
+                                public abstract void conduire();
+                            }
+                            public class Auto extends Vehicule()
+                            {
+                                public void conduire
+                                {
+                                    //instructions
+                                }
+                            } 
+                    Interface:
+                        imposer une regle ou contrat
+                        class abstraite: methode abstraite
+                        class implemente/utiliser une interface 
+                        syntax pour java:
+                            public interface Jeu
+                            {
+                                public void start();
+                            }
+                            public class FiFa implements Jeu
+                            {
+                                public void start(){
+                                    //definitions
+                                }
+                            }
+                            public class FiFa extends Logiciels implements Jeu
+                            {
+                                public void start(){
+                                    //definitions
+                                }
+                            }
+                            public class FiFa implements Jeu, Loisirs
+                            {
+                                public void start(){
+                                    //definitions
+                                }
+                            }
+                    class Object:
+                        class mere de tous les class
+            Interface graphic(Java graphic):
+                bibliotheques:
+                    Swing, AWT(old)         AWT:styles, javax.Awt  swing: objet graphic, javax.Swing, commence par J
+                    JFX(recent)
+                principes:
+                    conteneur => contenu
+                    conteneur.add/remove(contenu)
+                Swing:
+                    conteneur: 
+                        JFrame:
+                            methode:
+                                setVisible(true)    //rendre visible la fenetre
+                                setSize(x, y)       //taille en pixel
+                                setLocation(x, y)   //position
+                                setTittle("...")    //titre
+                        JPanel:                     //conteneur comme div/section
+                        JButton:                    //boutton
+                        JTextField                  //input
+                        JTextArea                   //text area
+                        JLabel                      //label
+                        JComboBox                   //select
+                        JCheckBox                   //input type checkbox
+                        JRadioButton                //input type radio
+                    dispositon:
+                        layout                      //claques
+
+
+                Awt:
+                    class:
+                        Dimension(x, y)             //taille 
+                        Color:
+                            setBackground()         //pour la class conteneur
+                    template:
+                        BorderLayout:
+                            setLayout("...")
+                        NullLayout
+                        FillLayout                  //background-size: cover
+                        GridLayout(nombre de ligne, colonne)                  //
+        
+    Exception:
+        anomalies (cas hors normale, le developpeur qui le definir)
+        il ne faut pas oublier l'anomalies'
+        Java:
+            3 cas possiples:
+                try
+                {
+                    //Evluation du code
+                }
+                catch (Exception)
+                {
+                    //traitement d'anomalies
+                }o
+                finally     //optionnelle
+                {
+                    //Il execute par defaut
+                }
+            Exception par defaut:
+                dans les classes standart
+                java.lang.Exception;
+            Exception personalise:
+                e.g:
+                    class Person
+                    {
+                        private float taille;
+                        public void setTaille(float taille) throws NegativeTailleException          //pour pouvoir traiter avec cet exeption
+                        {
+                            this.taille = taille;
+                            if(this.taille < 0)
+                            {
+                                throw new NegativeTailleException("ErrorMsg");              //renvoie le message d'erreur
+                            }
+                        }
+                    }
+                    Il faut declarer une class pour personaliser une Exception:
+                        class NegativeTailleException extends Exception
+                        {
+                            public NegativeTailleException(String msgErr)
+                            {
+                                super(msgErr);
+                            }
+                        }
+                    Utilisation:
+                        Person p = new Person;
+                        try
+                        {
+                            p.setTaille(30);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();            // ou System.out.println(e.getMessage());
+                        }
+    Action (Events):
+        Ecouter d'evenement: Listener(obesvateur d'evenement) => execute une operation
+        toutes objet graphic a une methode 
+            addActionListener(new ActionListner(ActionEvent e)
+            {
+                public void actionPermormed(ActionEvent e)
+                {
+                    //traitement
+                }
+            })
+        importation:
+            java.awt.ActionListner
+            java.awt.ActionEvent

@@ -1,0 +1,235 @@
+Resume:
+    Prise en main:
+        CMD(commandede base)
+    Administration:
+        gestion de system de fichier
+        gestion d'utilisateur et groupe
+        gestion de paquet:
+            installation a partir du code source et binaire
+            consturuction de paquet
+        gestion de processus
+        Installation system/paquet
+        Gestion de tache
+        configuration reseau
+Table:
+    construction de distribution
+    securisation du system:
+        sauvegarde
+    surveillance de service ou application
+    administration de service au systemn
+
+    principe de resolution de nom:
+        de droite vers a gauche
+        client:
+            interroge sons serveur DNS                                                                       l'adresse en realite se termine avec un point www.cnn.com.
+        Serveur DNS:
+            contient plusieurs route serveur
+            . -> contient le nom du domaine par pays:
+                Ex:
+                    .com        x.x.x.x
+                    .fr         x.x.x.x
+                un organisme occupe ce tache
+            .com -> contient le nom du domaine qu'on peut attribuer avec .com:
+                Ex:
+                    cnn.com         x.x.x.x
+
+
+I-Sauvegarde:
+    Il faut a tous prix faire la sauvegarde pour la securite
+    Deux types:
+        physiques/materiels:
+            copie physique du materiels -> server miroir (utilisation de 2eme serveur)
+            replication de donnees
+            same OS
+        system(app):
+    Il faut avoir la Politique de sauvegarde:
+        etude des cas possibles
+    Audit:
+        etude ou evaluation une chose:
+            Ex:
+                controle
+    Audit de system de l'information:
+        system
+        Reseau
+        Application
+    Sauvegarde integral(complet):
+        Peu de fois
+    Sauvegarde partiel:
+        Modification recente
+    Historique de sauvegarde:
+        sauvegarde incremental:
+            on n'ecrase pas mains incrementer le nom du backup
+            Ex:
+                backup
+                backup1
+                ...
+            Pour objectif d'avoir plusieurs versions
+    RAID => methode pour la gestion de sauvegarde
+    Commandes:
+        $cp:
+            toute les proprietes:
+                dependances
+                propriete
+                configuration
+            FS
+            DP
+        $scp
+        $sftp
+        FTP                                                         protocole le plus utilisee : http/https, ftp://
+        $tar
+        copie physique:
+            au niveau des proprietes pysiques (gravage)
+            $dd if=[dev input] of=[destination: dev/FS]
+            options:
+                bs=1M vitesse de transfert
+            partition to iso:
+                $dd if=/dev/sda1 of=/var/doto/backup.iso
+            $cpio:
+                compresseur avec copie physique
+    inode:
+        contient l'address pointeur du disque
+II-Surveillance System:
+    Trace
+    /var/log: fichier journaux
+    il faut mettre les journaux dans un server logs pour prevention d'une intruision
+    les fichiers qu'on doit savoir:
+        /var/log/auth.log:          //toutes les evenements d'authentifications
+        /var/log/wtmp:           //les derniers authentifications des utilisateurs
+            $last:                 //lire ce fichier binaire 
+        /var/log/wtmp:              //les authentifications rejetes
+            $lastb:                 //--------||--------
+        /var/log/boot.log:          //journaux des demarrages
+        /var/log/message:           //exploitee avec la cmd dmesg
+            ubuntu: kern.log
+    Syslogd/Rsyslogd:                 //intermediaire entre un programme et le system
+        gerer toutes les journaux du system
+        version plus ancienne: SysVinit
+        Service ou Deamon => tache en arriere plan dont on peut surveiller
+        DAEMON: Disk And Execution MONitor
+        types:
+            propre pour l'application
+            personnalise
+        Si on veut creer un service il faut inclure au systemd le script pour ce service
+        Fichier de configuration:
+            /etc/systemd/system/                //service personnalise
+            /lib/systemd/system/                //service propre du system
+        Comment configurer un service?
+            [init]
+                Description:
+            [Service]
+                Type: simple                            //type de processus
+                ExecStart: /bin/bash                    /chemin absolue du script/script.sh
+            [Install]
+                WantedBy: multi-user.target
+        Fichier principale des log:
+            /etc/syslog.conf
+        Comment creer un fichier log?
+            facility.level          /chemin vers le fichier
+            Facility                      //Auth,AuthPriv,mail
+            Level                           //info
+            $man5 syslog.conf               //pour connaitre les valeurs de facility et level
+        /etc/syslog.d/                      //
+
+        Rotation / logrotate:
+            archivages      //incrementer les fichiers
+            /etc/logrotate.conf
+            /etc/logrotate.d/
+        Transfert de fichiers log dans un serveur:
+            activer tcp/udp port 153
+
+III-FILTRAGE RESEAU:
+    Type de connexion:
+        Input 
+        Output
+        Forward
+    Cas possible:
+        >protocol
+        >state
+        >port
+        >IP
+        >MAC
+    Outils:
+        $ipfw: 
+            noyau linux < 2.0
+            utilse encore par BSD(qui utilise un autre noyau que Linux utilise)
+        $ipchains:
+            2.0 < noyau Linux < 2.4
+        netfilter:
+            $iptables: 
+                options:
+                    -t: specifier la table de filtrage en fonction de flux qu'on utilise
+                        table filter: 
+                            INPUT/OUTPUT/FORWARD
+                            table par defaut  de iptables
+                        Ex:
+                            $iptables -t [table] -Action
+                        Action:
+                            effacer: -F         //vider tous les regles
+                            lister: -L
+                            ajout: -A
+                            supprimer: -X(older version)/-D    //supprimer une regles
+                        Regles(rules): ensemble de commande que le system charge avec iptables
+                        Ex: liste
+                            $iptalbes -t FILTER -L
+                        Policy: les actions qu'on v faire par rapport au flux
+                            ACCEPT              //accepte
+                            DROP                //rejeter sans explication
+                                $iptables -P INPUT(target) DROP
+                            REJECT              //rejeter avec explication
+                        Ex: ajout
+                            #iptables -A OUTPUT -d 192.168.1.1 -j ACCEPT
+                            #iptables -A [type] [options s/d] [ip] -j [target]
+                    -s: source
+                    -d: destination
+                    -i: [interface input]
+                    -o: [interface output]
+                    -m: multi
+                        -m multiport --dports 80,22,...
+                        -m mac --mac-source
+                    #iptables-save              //sauvegarde
+        interface:
+    Pourquoi le filtrage?
+        On veut mettre en place le Parefeu/Firewall
+    Type de filtrage:
+        ACCEPT              //accepte tous et on bloque l'intrus
+        DROP                //drop tous et accepte
+
+    Protocole:
+        -p:
+            tcp: les services connectes
+            udp: n'ont pas besoin de connexion
+            icmp: recuperation de message retourne par le reseau
+    Port:
+        port par defaut des services: /etc/services
+        port  utilisable: 2^16-1
+        port usuels:
+            20/21:  ftp
+                types:
+                    anonymous ftp(anonymes)
+                    autentifie:
+                        en utilisant SQL / LDAP(information dont on utilise plus frequent mais modifie moins frequent)
+                paquet:
+                    proftpd
+                $ftp x.x.x.x
+                Commande:
+                    ftp>put fichiers
+                    ftp>get fichiers
+                    ftp>lcd                 //lister les fichiers local
+            22:     ssh
+            23:     Telnet
+                execute des commandes avec une macine distante
+                se communiquer a un service distant
+
+            53:     DNS
+            25:     SMTP
+            80:     http
+            110:    pop3
+                receive mail via client-mail
+            143:    imap
+                receive mail via web-mail
+            443:    https
+        PORT actif:
+            $netstat -ntlp
+        Outils de surveillance:
+            $tcpdump -i eth0 :              //ecoute les informations passant par eth0 
+            $wireshark:                     //

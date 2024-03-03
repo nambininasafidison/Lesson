@@ -1,0 +1,15 @@
+Liaison serie:
+    Pour relier un arduino et un objet il faut utiliser la liason serie
+    en utilisant de port serie
+    Tx et Rx: trasmission et recepteur
+Transfert de donnees:(text ou binaire)
+    Transfert par partie:
+        par bit au niveau numerique 
+        par signal au niveau analogique
+        nombre de signal par seconde : Baud
+    Vitesse de Transfert:
+        La vitesse de transmission et la reception doit etre synchronise
+        il faut definir la vitesse de transmission: Serial.begin(9600); => pour l'arduino (depend du module utilise)
+    Transfert de chaine de caractere:'
+        Serial.print("string");
+        Serial.println('stinrg');

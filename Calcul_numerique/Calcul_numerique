@@ -1,0 +1,64 @@
+Entite en memoire:
+    Par exemple: variable
+        >nom pour y acceder
+        >valeur qu'elle contient
+        >son adresse en memoire
+        >son type
+Programmation:
+    Clairs, pour soi et les autres
+    Bien commentes et documentes
+    Les apects fondamentaux de Math:
+        L'aspect formel: 
+            manipulation des formules math
+        L'aspect numerique:
+            approximation
+        L'aspect geometrique:
+            gragh pour bien comprendre
+        L'utilisation des ordinateurs:
+            programmation
+    Une bonne pratique C/C++:
+        80% du temps pour la reflexion sur le probleme
+        20% maximum pour le codage: on ne code qu'un probleme bien compris
+    Resolution de problemes scientifques:
+        Il faut que les methodes soient reproductibles
+    A chercher:
+        pont de Tacoma
+        mtotec
+    Qualite des algorithmes:
+        La precision:
+            plus precis, c'est mieux
+            chacun sa precision
+             a equilibrer avec le cout
+        Stabilite:
+            par rapport aux erruers de deonees
+            par rapport aux methodes
+        Efficacite:
+            le temps est un cout
+            les ressources sont precieuses et en quantite finie
+    Les erreus en calcul numeriques:
+        La modelistion introduit des simplifications, sources des erreurs de modele:
+            Dans la modelisation climatique, on suppose generalement que les parametres sont constants a l'echelle d'une ville
+        L'ordinatuer calcule a une precision finie, source de serreus d'arrondi
+        Les algorithmes intrduisent des erreus de troncature
+    Probleme de stabilite : 
+        un simple probleme initial donne un grand probleme de resulat
+        probleme mal conditionne
+    Efficacite:
+        Comparaison de quelques processeurs:
+            Apple M2 Ultra (76 cores): GPU FP32 27.2 TFlops
+            Xbox Series X: 12 TFlops
+            Nvidia GeForce RTX 4090: 100 TFlops
+    Languages:
+        Compiles:
+            optimises pour le calcul: FORTRAN, C/C++, Rust
+                portables
+                rapide
+                standardises
+        Interpretes:
+            le developpement rapide et le prototypage : Matlab, Scilab, Python, Maxima, ...
+        (Re-)utiliser les bibliotheques existantes : Netlib, Numerical Recipes
+        Machine virtuelle: (ex: Java)
+            utilise une machine virtuelle pour executer un fichier binaire
+    Methode de GAUSS:
+        triangularisation
+        Resolution du system triangulaire equivalent

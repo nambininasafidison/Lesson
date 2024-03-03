@@ -1,0 +1,12 @@
+Interface graphique c++:
+    i18n: Internationalisation (translation)
+    qnx : systeme embarque
+    xml:        eXtended Makeup Language
+        language initial des language xml
+    objet qt : commence par Q
+    signal/slots:
+        slots: evenement 
+        signal: function a executer a l'evenement 
+    documentation:
+        cpp: Doc Api, qts-doc
+        java: java-doc

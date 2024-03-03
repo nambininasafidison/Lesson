@@ -1,0 +1,39 @@
+Fabrication numerique
+
+Etapes:
+    -Croquis    //manao sarisary (a partir de 1970)
+    -developpement  
+    -Test
+Materiels:
+    proprietaire:
+        code source, schema non accessible
+    libre: a partir de 2005/2006 (arduino)                      breadboard
+        modifiefable a nos besoins
+        Microcontroleur:
+            composant qui effectue une seul tache
+        carte pour construire un system embarque:
+            on peut construire un system embarque (une machine)             PCB(carte d'un circuit imprime)
+        Sonde:
+            detection
+        Connexion:
+
+
+Arduino:
+    composants:
+        microcontroleur (a la fois stockage et pocesseur)
+        PIN :
+            alimentation
+            PIN numerique (interaction)
+            PIN analogique (entre 0 a 1023)                                 Photos resistance(varie selon la lumiere)   rx(reception)  tx(transmission)
+            port serial                                                     ultrason (detection de vitesse de son)
+    developpement:
+        sketch (croquis):
+            .ino
+            C
+        void setup:
+            initialization
+        void loop:
+            boucle
+        function:
+            pinmode(PIN_NO, mode);       //pinmode(12, OUTPUT);     declaration PIN 
+            digitalwrite(PIN_NO, value);        //digital(12, 1);       execution
