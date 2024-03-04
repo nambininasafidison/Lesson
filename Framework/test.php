@@ -52,5 +52,62 @@
             <input type="submit" value="Modifier" class="submit"/>
         </form>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function editRow(id) {
+            var a = $("#row-" + id + " td:nth-child(1)").text();
+            var b = $("#row-" + id + " td:nth-child(2)").text();
+            $("#x").val(a);
+            $("#y").val(b);
+            $("#id").val(id);
+            $("#modif-form").show();
+        }
+
+        function deleteRow(id) {
+            $.ajax({
+                url: "test.php",
+                type: "post",
+                data: {id: id, action: "delete"},
+                success: function(data) {
+                    $("#row-" + id).remove();
+                },
+                error: function(xhr, status, error) {
+                    alert("Erreur : " + error);
+                }
+            });
+        }
+
+        $("[data-id][data-action]").click(function() {
+            var id = $(this).data("id");
+            var action = $(this).data("action");
+            if (action == "edit") {
+                editRow(id);
+            } else if (action == "delete") {
+                deleteRow(id);
+            }
+        });
+
+        $("#modif-form").submit(function(e) {
+            e.preventDefault();
+            var x = $("#x").val();
+            var y = $("#y").val();
+            var id = $("#id").val();
+            var action = $("#action").val();
+            $.ajax({
+                url: "test.php",
+                type: "post",
+                data: {x: x, y: y, id: id, action: action},
+                success: function(data) {
+                    $("#row-" + id + " td:nth-child(1)").text(x);
+                    $("#row-" + id + " td:nth-child(2)").text(y);
+                    $("#row-" + id + " td:nth-child(3)").text(x * y);
+                    $("#modif-form").hide();
+                },
+                error: function(xhr, status, error) {
+                    alert("Erreur : " + error);
+                }
+            });
+        });
+    </script>
     </body>
     </html>
