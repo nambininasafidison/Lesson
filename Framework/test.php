@@ -52,7 +52,7 @@
             <input type="submit" value="Modifier" class="submit"/>
         </form>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="jquery.js/"></script>
     <script>
         function editRow(id) {
             var a = $("#row-" + id + " td:nth-child(1)").text();
