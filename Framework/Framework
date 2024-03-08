@@ -43,4 +43,22 @@ Framework:
                 S'il existe un extrait de code php il faut que l'extension du fichier soit php
 
                 Recuperation form :
-                    
+                    $_POST("$a");
+                    $_GET("$a");
+                Gestion variable de session:
+                    Cookies:
+                        definition:
+                            set_cookies
+                    Session:
+                        session_start();        //Doit etre au premier ligne avant tout les balises html
+                        Affection:
+                            $_SESSION['var'] = $a;
+                        Utilisation:
+                            echo $_SESSION['var']
+                        free:
+                            session_destroy();
+                        Test tableau:
+                            is_array();
+                        Test existence d'une variable:
+                            isset();
+                            empty();           // null

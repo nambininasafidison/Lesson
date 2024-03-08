@@ -233,3 +233,17 @@ III-FILTRAGE RESEAU:
         Outils de surveillance:
             $tcpdump -i eth0 :              //ecoute les informations passant par eth0 
             $wireshark:                     //
+    Filter: NAT(Network Adress Translation)
+        -t NAT
+        Ex: 
+            Machine source IP{prive} => IP{pub}
+        POSTROUTING:
+            chaine apres routage
+        PREROUTING:
+            avant
+        FAI:    Fournisseur D'Acces Internet
+        Commandes:
+            $iptables -t NAT -A POSTROUTING -s 192.168.1.0/24 -o iface1 -j SNAT --to 193.251.158.56 (statique)
+            -j MASQUERADE (dynamiquement)
+            $iptables -t NAT -A PREROUTING -d 192.139.15.6 --dport 22 -i iface0 -j DNAT --to 192.168.1.56:22
+            -j DNT <=> -j REDIRECT
