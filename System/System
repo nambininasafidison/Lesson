@@ -247,3 +247,125 @@ III-FILTRAGE RESEAU:
             -j MASQUERADE (dynamiquement)
             $iptables -t NAT -A PREROUTING -d 192.139.15.6 --dport 22 -i iface0 -j DNAT --to 192.168.1.56:22
             -j DNT <=> -j REDIRECT
+IV-OPTISATION RESEAU:
+    Serveur proxy:
+        Pour stocker des reponses a des requetes dont les hotes dans une LAN font
+        Mise en cache du contenu du web
+        Ce qu'on peut faire avec la mise cache avec le proxy:
+            Filtrage: connection
+                IP:
+                    filter les hotes avec IP
+                Domain:
+                    filtrer les hotes avec ses nom de domoine 
+                authentification:
+                    utilisation de compte utilisateur requise
+                URL:
+                    filtrage de contenu du site
+                fichier:
+                    filtrage des fichies a telecharge
+                Temps:
+                    periode d'utilisation
+                port:
+                    les ports a utiliser
+                taille de telechargement:
+            Surveillance:
+                utilisation des fichiers log
+                outils:
+                    calamaris
+                    sarg
+                    prostat
+            Au niveau de l'optimisation on va voir QOS(Quality Of Service):
+                Pour ameliorer la qualite d'un service
+        Comment configurer un proxy ?
+            Pour les clients:
+                Dans le parametres de navigation : Parametres reseau
+                Dans le system
+            Pour le serveur : 
+                outils:
+                    SQUID:
+                        fichie de configuration: /etc/squid/squid.conf
+                configuration:
+                    sauvegarder le fichier de configuration par defaut:
+                        squid.conf.bak
+                    verification de port pour la configuration du serveur proxy:
+                        par defaut: port 3128
+                        specification: http_port 8080
+                    parametre cache memoire:
+                        cache_mem   taille 
+                        cache_dir   ufs /var/spool/squid    taille total dedie  nombre de reperrtoire   nombre d'element dans chaque repertoire      //utilise le system de fichier ufs 
+                        /var/spool/squid:  
+                            swap directory
+                            fichier ilisible a d'autre system de fichier que ufs
+                            formatage du repertoire en ufs:
+                                formatage ou initialisation du cache_dir:
+                                    stoper squid
+                                    $squid -z
+                        ACL: Access Control List:
+                            Declaration
+                            Affectation/autorisation    regles
+                            syntaxe:
+                                declaration: acl nom_regle type valeur(selon le type)
+                                autorisation: http_acces action nom_regle
+                                    action:
+                                        deny
+                                        allow
+                            EX: 192.168.1.100
+                                declaration: 
+                                    acl test_pc src 192.168.1.100
+                                    acl test_site destdonain/srcdomain nom_domain
+                                autorisation: http_access deny test_pc
+                            Il fallait que toutes les autorisations soit avant : http_acces deny all
+                            On peut aussi configurer dans le fichier conf.d/debian 
+V-SERVEUR DNS:
+    Outils:
+        bind9
+        postffix
+        mailutils
+        dovecot-imapd
+        dovecot-pop3d
+    bind9:
+        fichier de configuration: /etc/bind
+            named.conf
+VI-SERVEUR MAIL:
+    Service:
+        MTA: Mail Transfert Agent
+            postfix
+            sendmail
+            exim
+            qmail
+            MS Exchange
+    Configuration:
+        Recepition courrier: 
+            Mailbox:
+                /var/mail/%u        //stockage courrier
+                Chaque utilisateur a un fichier
+            Maildir:
+                /home/user/mail/
+                Chaque courrier a un fichier 
+        Utilisateur:
+            System: 
+                On cree une compte a chaque utilisateur au system
+                PAM:
+                    module qui gere l'athentification 
+                LDAP:
+                    gestion de base de donnees (big data)
+            DB:
+                On utilise des bases de donnees pour les comptes 
+                Multi domain ou virtual users
+        Postfix:
+            fichier de cofiguration:    /etc/postfix
+                main.cf         //main configuration
+                    myorigin        //mail entrant
+                    mydestination   
+                    mynetworks      //machine autorise
+                    smtpd_banner    //
+                    relay_host      //serveur mail accessible a internet
+                master.cf
+
+            #postconf           //commande pour afficher les parametres
+            mailing list:   mail groupe
+            send mail
+                $mail user.domain_name
+            reception
+                $mail
+                    
