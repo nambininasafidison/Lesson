@@ -26,8 +26,8 @@ Framework:
             code PHP:
                 <? php
                     //code php;
-                ?>
-                Toutes instructions se terminent par 
+                '?>
+                Toutes instructions se terminent par ;
                 Il n'exige pas le type de variable:
                     $variable = 1;
                 Affichage:
@@ -43,61 +43,58 @@ Framework:
                 S'il existe un extrait de code php il faut que l'extension du fichier soit php
 
                 Recuperation form :
-                    $_POST("$a");
-                    $_GET("$a");
-                Gestion variable de session:
-                    Cookies:
-                        definition:
-                            set_cookies
-                    Session:
-                        session_start();        //Doit etre au premier ligne avant tout les balises html
-                        Affection:
-                            $_SESSION['var'] = $a;
-                        Utilisation:
-                            echo $_SESSION['var']
-                        free:
-                            session_destroy();
-                        Test tableau:
-                            is_array();
-                        Test existence d'une variable:
-                            isset();
-                            empty();           // null
-        Utilisation de base de donnees:
-            Installation:
-                SGBD: Mysql, Postgresql, OpenGauss, Firebird, Oracle
-                modules php:
-                    php-mysql
-                    php-pgsql
-                    php-firebird
-                    php-oracle
-                    php-odbc
-            Operations:
-                DB:
-                    Connection SGBDR: 
-                    Selection DB
-                    Requete SQL
-                    Deconnection
-                PHP:
-                    Connection SGDBR: 
-                        msql_connect(address, user, pwd, port);
-                        or die("Connection error");     //gestion d'erreur
-                    Selection DB:
-                        mysql_select_db("DB_name");
-                        or die("Connection error");
-                    Traitement SQL:
-                        insertion/deletion/update:
-                            mysql_query("SQL commande");
-                        selection:
-                            $resultat = mysql_query("select ..");           //totalite
-                            $row = mysql_fecth_row($resultat);
-                            while($line == mysql_fecth_row($resultat)){
-                                $c1 = line[0];
-                                .
-                                .
-                            }
-                            $row1 = mysql_fecth_assoc($resultat);
-                            while( $line = mysql_fecth_assoc($resultat) ){
-                                $a = $line["nom"];
-                            }
-                    Deconnection:
-                        msql_close();
+    JAVA:
+        Languages: JSP/Servelets
+        JSP:    extensions .jsp
+            code java inclus dans le code html
+        Servelets: 
+            code html inclus dans le code java
+        On peut utiliser les deux en meme project
+        Cotes serveurs:
+            Hebergement avec des serveurs d'application: assure l'execution du sites web
+                Tomcat:     
+                jboss:      
+                WebSphere:      
+                port par defaut:    8080
+                On peut heberger plusieurs application
+                On utilise un serveur proxy 
+                Prerequis: 
+                    Tomcat
+                    Eclipse:
+                        editer le code
+                        construction du projet
+                        generer un fichier archives web .war:
+                            deploy this file in the appication server
+                    Ant / maven:
+                        preparation de l'environement de compilation
+                        deploiement du fichier archives
+                configurations:
+                    Tomcat:
+                        exportation des path :
+                            JAVA_HOME
+                            CATALINA_HOME
+                    Eclipse:
+                        workspace:      //repertoire du project
+                        creer un project
+                        type: 
+                            eclipse-jee(Java Enterprise Edition)
+                        type de project: 
+                            Dynamic web project
+                        Project title
+                        Target runtimes 
+                        Arborescence du projet:
+                            Project
+                                src     //fichier source java
+                                main        (Web)
+                                    web-INF
+                                    web / webapp
+                                        index.jsp
+                                    web.xml: regrouper les variables publiques qu'on va utiliser
+        Syntaxes Java:
+            decalration variable:
+                <%
+                    String anarana = "test"
+                %>
+            utilisation:
+                <%=anarana
+                %>
